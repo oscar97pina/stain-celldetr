@@ -1,0 +1,95 @@
+__base__:
+  - configs/experiments/adapt/pretrain_he_detection.yaml
+experiment:
+  name: aqt_swinL_4lvl_re
+  wandb: True
+  output_dir: /path/to/output/dir
+  output_name: aqt_swinL_4lvl_re.pth
+  project: stain-celldetr
+  seed: 42
+domain:
+  src:
+    dataset:
+      train:
+        __file__: configs/base/data/pannuke.yaml
+        fold: fold1
+        num_classes: 1
+    transforms:
+      transforms:
+      augmentations:
+        __file__: configs/base/data/augmentations/orient_geo_hed.yaml
+      normalize:
+        __file__: configs/base/data/normalize/pannuke_1.yaml
+  tgt:
+    dataset:
+      train:
+        root: /path/to/target/dataset
+        num_classes: 1
+      val:
+        name: cell
+        num_classes: 1
+        root: /path/to/target/validation/dataset
+    transforms:
+      augmentations:
+        - name: elastic
+          p: 0.2
+          alpha: 0.5
+          sigma: 0.25
+        - name: hflip
+          p: 0.5
+        - name: vflip
+          p: 0.5
+        - name: rotate90
+        - name: blur
+          p: 0.2
+          kernel_size: 9
+          sigma: [0.2, 1.0]
+        - name: randomcrop
+          p: 1.0
+          size: 256
+        - name: resizedcrop
+          p: 0.2
+          size: 256
+          scale: [0.8, 1.0]
+      normalize:
+        __file__: configs/base/data/normalize/re.yaml
+  eval:
+    dataset:
+      name: cell
+      num_classes: 1
+      root: /path/to/validation/dataset
+      folds:
+        train: 0.0
+        val: 0.5
+        test: 0.5
+    transforms:
+      augmentations:
+        __file__: configs/base/data/augmentations/orient_geo.yaml
+      normalize:
+        __file__: configs/base/data/normalize/re.yaml
+model:
+  name: aqt_deformable_detr
+  window:
+    size: 256
+    stride: 192
+  backbone:
+    checkpoint:
+  uda:
+    backbone_align: True
+    space_align: True
+    channel_align: True
+    instance_align: True
+loss:
+  uda:
+    da_gamma: 2
+    backbone_loss_coef: 0.1
+    space_query_loss_coef: 0.1
+    channel_query_loss_coef: 0.001
+    instance_query_loss_coef: 0.01
+optimizer:
+  lr_auto_scale: False
+loader:
+  train:
+    batch_size: 1
+  val:
+    batch_size: 1

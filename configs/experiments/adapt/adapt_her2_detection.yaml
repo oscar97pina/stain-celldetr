@@ -1,0 +1,10 @@
+__base__:
+  - configs/experiments/adapt/adapt_re_detection.yaml
+experiment:
+  name: aqt_swinL_4lvl_her2
+  output_name: aqt_swinL_4lvl_her2.pth
+domain:
+  tgt:
+    transforms:
+      normalize:
+          __file__: configs/base/data/normalize/her2.yaml

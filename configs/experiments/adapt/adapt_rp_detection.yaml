@@ -1,0 +1,10 @@
+__base__:
+  - configs/experiments/adapt/adapt_re_detection.yaml
+experiment:
+  name: aqt_swinL_4lvl_rp
+  output_name: aqt_swinL_4lvl_rp.pth
+dataset:
+  domain:
+    transforms:
+      normalize:
+          __file__: configs/base/data/normalize/rp.yaml

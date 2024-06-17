@@ -1,0 +1,15 @@
+__base__:
+  - configs/experiments/pannuke/swin/deformable_detr_swinL_4lvl_split123.yaml
+experiment:
+  project: stain-celldetr
+  name: defdetr_he_pretrain
+  output_name: defdetr_swinL_4lvl_he.pth
+model:
+  num_classes: 1
+dataset:
+  train:
+    num_classes: 1
+  val:
+    num_classes: 1
+  test:
+    num_classes: 1
