@@ -58,6 +58,7 @@ celldetr/
 |   |-- window/              # Implementation of window-based DETR model
 |   |-- backbone/            # Backbone networks used in the models
 |-- engine.py                # Main engine script for coordinating the training and evaluation process
+````
 
 ### Adapting form HE to IHC
 
