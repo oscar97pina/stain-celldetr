@@ -9,7 +9,7 @@ from torch.distributed.elastic.multiprocessing.errors import record
 from collections import OrderedDict
 
 import sys
-sys.path.append('../celldetr')
+sys.path.append('./')
 from celldetr.util.distributed import init_distributed_mode, save_on_master, is_main_process, get_rank
 from celldetr.util.misc import seed_everything
 from celldetr.util.config import ConfigDict

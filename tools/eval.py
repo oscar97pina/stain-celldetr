@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, Distr
 from collections import OrderedDict
 
 import sys
-sys.path.append('../celldetr')
+sys.path.append('./')
 from celldetr.util.distributed import init_distributed_mode, get_rank
 from celldetr.util.misc import seed_everything
 from celldetr.util.config import ConfigDict

@@ -10,7 +10,7 @@ from skimage import color
 import torch
 
 import sys
-sys.path.append('../celldetr')
+sys.path.append('./')
 from celldetr.util.distributed import init_distributed_mode, save_on_master, is_main_process, get_rank, all_gather
 from celldetr.util.config import ConfigDict
 from celldetr.util.misc import nested_tensor_from_tensor_list
